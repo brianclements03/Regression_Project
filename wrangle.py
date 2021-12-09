@@ -128,6 +128,7 @@ def clean_and_prep_data(df):
     df['age'] = year - df.yearbuilt
     # dropping the 'yearbuilt' column now that i have the age
     df = df.drop(columns=['yearbuilt', 'tax_amount'])
+# after getting to mvp, please drop all rows where the sq_ft is less than 100 or 200
 
     return df
 
