@@ -127,7 +127,7 @@ def clean_and_prep_data(df):
     year = date.today().year
     df['age'] = year - df.yearbuilt
     # dropping the 'yearbuilt' column now that i have the age
-    df = df.drop(columns=['yearbuilt'])
+    df = df.drop(columns=['yearbuilt', 'tax_value'])
 
     return df
 
@@ -142,7 +142,18 @@ def split_zillow(df):
     # The remainder is here divided .7 to train and .3 to validate
     train, validate = train_test_split(train, test_size=.3, random_state=123)#, stratify= train.tax_value)
 
-    return train, validate, test
+    # return train, validate, test
+
+    X_train = train.drop(columns=['tax_amount'])
+    y_train = pd.DataFrame(train.tax_amount, columns=['tax_amount'])
+
+    X_validate = validate.drop(columns=['tax_amount'])
+    y_validate = pd.DataFrame(validate.tax_amount, columns=['tax_amount'])
+
+    X_test = test.drop(columns=['tax_amount'])
+    y_test = pd.DataFrame(test.tax_amount, columns=['tax_amount'])
+
+    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
 
 
 def encode_zillow(df):

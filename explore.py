@@ -33,8 +33,8 @@ warnings.filterwarnings("ignore")
 # importing my personal wrangle module
 import wrangle
 
-categoricals = ['county']
-continuous = ['bedrooms','bathrooms','sq_ft','tax_value','tax_amount','age']
+categoricals = ['county', 'bedrooms','bathrooms']
+continuous = ['sq_ft','tax_value','tax_amount','age']
 
 def plot_variable_pairs(x,y, df):
     '''
