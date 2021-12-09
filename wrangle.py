@@ -51,12 +51,15 @@ def new_zillow_data():
     write it to a csv file, and returns the df.
     '''
     # Create SQL query.
+
+    # I checked, and the following query should and better return exactly 52,442 rows
     sql_query = 'SELECT \
-                bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt, \
-                taxamount, fips\
-                FROM zillow.properties_2017 AS zp LEFT JOIN zillow.propertylandusetype AS plt USING (propertylandusetypeid) \
-                WHERE plt.propertylandusetypeid = 261'
-    
+            bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt, taxamount, fips\
+            FROM zillow.properties_2017 AS zprop\
+            JOIN zillow.predictions_2017 as zpred USING (parcelid)\
+            JOIN zillow.propertylandusetype AS plt USING (propertylandusetypeid)\
+            WHERE plt.propertylandusetypeid = 261 OR 279 AND zpred.transactiondate < 2018-01-01;'
+
     # Read in DataFrame from Codeup db.
     df = pd.read_sql(sql_query, get_connection('zillow'))
     
@@ -126,6 +129,8 @@ def clean_and_prep_data(df):
     df.yearbuilt =  df.yearbuilt.astype(int)
     year = date.today().year
     df['age'] = year - df.yearbuilt
+    # making a feature called bathrooms_per_sq_ft
+    df['sq_ft_per_bathroom'] = df.sq_ft / df.bathrooms
     # dropping the 'yearbuilt' column now that i have the age
     df = df.drop(columns=['yearbuilt', 'tax_amount'])
 # after getting to mvp, please drop all rows where the sq_ft is less than 100 or 200
@@ -135,7 +140,7 @@ def clean_and_prep_data(df):
 
 def split_zillow(df):
     '''
-    Takes in the zillow dataframe and returns SCALED train, validate, test subset dataframes
+    Takes in the zillow dataframe and returns train, validate, test subset dataframes
     '''
     # SPLIT
     # Test set is .2 of original dataframe
@@ -188,11 +193,22 @@ def scale_zillow(train,validate,test):
     # 2. fit the object
     scaler.fit(train)
     # 3. use the object. Scale all columns for now
-    train = pd.DataFrame(scaler.transform(train), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
+    train_scaled = pd.DataFrame(scaler.transform(train), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
        'LA', 'Orange', 'Ventura'])
-    test = pd.DataFrame(scaler.transform(test), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value','age',
+    test_scaled = pd.DataFrame(scaler.transform(test), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value','age',
        'LA', 'Orange', 'Ventura'])
-    validate = pd.DataFrame(scaler.transform(validate), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
+    validate_scaled = pd.DataFrame(scaler.transform(validate), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
        'LA', 'Orange', 'Ventura'])
 
-    return train, validate, test
+    # 4. Divide into x/y
+
+    X_train_scaled = train_scaled.drop(columns=['tax_value'])
+    y_train_scaled = pd.DataFrame(train_scaled.tax_value, columns=['tax_value'])
+
+    X_validate_scaled = validate_scaled.drop(columns=['tax_value'])
+    y_validate_scaled = pd.DataFrame(validate_scaled.tax_value, columns=['tax_value'])
+
+    X_test_scaled = test_scaled.drop(columns=['tax_value'])
+    y_test_scaled = pd.DataFrame(test_scaled.tax_value, columns=['tax_value'])
+
+    return train_scaled, validate_scaled, test_scaled, X_train_scaled, y_train_scaled, X_validate_scaled, y_validate_scaled, X_test_scaled, y_test_scaled
