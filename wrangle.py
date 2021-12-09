@@ -127,7 +127,7 @@ def clean_and_prep_data(df):
     year = date.today().year
     df['age'] = year - df.yearbuilt
     # dropping the 'yearbuilt' column now that i have the age
-    df = df.drop(columns=['yearbuilt', 'tax_value'])
+    df = df.drop(columns=['yearbuilt', 'tax_amount'])
 
     return df
 
@@ -144,14 +144,14 @@ def split_zillow(df):
 
     # return train, validate, test
 
-    X_train = train.drop(columns=['tax_amount'])
-    y_train = pd.DataFrame(train.tax_amount, columns=['tax_amount'])
+    X_train = train.drop(columns=['tax_value'])
+    y_train = pd.DataFrame(train.tax_value, columns=['tax_value'])
 
-    X_validate = validate.drop(columns=['tax_amount'])
-    y_validate = pd.DataFrame(validate.tax_amount, columns=['tax_amount'])
+    X_validate = validate.drop(columns=['tax_value'])
+    y_validate = pd.DataFrame(validate.tax_value, columns=['tax_value'])
 
-    X_test = test.drop(columns=['tax_amount'])
-    y_test = pd.DataFrame(test.tax_amount, columns=['tax_amount'])
+    X_test = test.drop(columns=['tax_value'])
+    y_test = pd.DataFrame(test.tax_value, columns=['tax_value'])
 
     return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
 
@@ -187,11 +187,11 @@ def scale_zillow(train,validate,test):
     # 2. fit the object
     scaler.fit(train)
     # 3. use the object. Scale all columns for now
-    train = pd.DataFrame(scaler.transform(train), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'tax_amount', 'age',
+    train = pd.DataFrame(scaler.transform(train), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
        'LA', 'Orange', 'Ventura'])
-    test = pd.DataFrame(scaler.transform(test), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'tax_amount', 'age',
+    test = pd.DataFrame(scaler.transform(test), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value','age',
        'LA', 'Orange', 'Ventura'])
-    validate = pd.DataFrame(scaler.transform(validate), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'tax_amount', 'age',
+    validate = pd.DataFrame(scaler.transform(validate), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
        'LA', 'Orange', 'Ventura'])
 
     return train, validate, test
