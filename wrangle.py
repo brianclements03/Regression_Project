@@ -181,9 +181,35 @@ def encode_zillow(df):
     return df
 
 
+# this commented-out section is to scale train only. the full scaler is below
+
+# def scale_zillow(train):
+#     '''
+#     Takes in the zillow dataframe and returns SCALED train, validate, test subset dataframes
+#     '''
+#     # SCALE
+#     # 1. create the object
+#     scaler = sklearn.preprocessing.MinMaxScaler()
+#     # 2. fit the object
+#     scaler.fit(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+#        'LA', 'Orange', 'Ventura']])
+#     # 3. use the object. Scale all columns for now
+#     train_scaled =  scaler.transform(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+#        'LA', 'Orange', 'Ventura']])
+#     train_scaled = pd.DataFrame(train_scaled, columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+#        'LA', 'Orange', 'Ventura'])
+
+#     # 4. Divide into x/y
+
+#     X_train_scaled = train_scaled.drop(columns=['tax_value'])
+#     y_train_scaled = pd.DataFrame(train_scaled.tax_value, columns=['tax_value'])
 
 
-def scale_zillow(train,validate,test):
+#     return train_scaled, X_train_scaled, y_train_scaled
+    
+
+
+def scale_zillow(train, validate, test):
     '''
     Takes in the zillow dataframe and returns SCALED train, validate, test subset dataframes
     '''
@@ -191,13 +217,22 @@ def scale_zillow(train,validate,test):
     # 1. create the object
     scaler = sklearn.preprocessing.MinMaxScaler()
     # 2. fit the object
-    scaler.fit(train)
+    scaler.fit(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+       'LA', 'Orange', 'Ventura']])
     # 3. use the object. Scale all columns for now
-    train_scaled = pd.DataFrame(scaler.transform(train), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
+    train_scaled =  scaler.transform(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+       'LA', 'Orange', 'Ventura']])
+    train_scaled = pd.DataFrame(train_scaled, columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
        'LA', 'Orange', 'Ventura'])
-    test_scaled = pd.DataFrame(scaler.transform(test), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value','age',
+
+    validate_scaled =  scaler.transform(validate[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+       'LA', 'Orange', 'Ventura']])
+    validate_scaled = pd.DataFrame(validate_scaled, columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
        'LA', 'Orange', 'Ventura'])
-    validate_scaled = pd.DataFrame(scaler.transform(validate), columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age',
+
+    test_scaled =  scaler.transform(test[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
+       'LA', 'Orange', 'Ventura']])
+    test_scaled = pd.DataFrame(test_scaled, columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
        'LA', 'Orange', 'Ventura'])
 
     # 4. Divide into x/y
@@ -211,4 +246,4 @@ def scale_zillow(train,validate,test):
     X_test_scaled = test_scaled.drop(columns=['tax_value'])
     y_test_scaled = pd.DataFrame(test_scaled.tax_value, columns=['tax_value'])
 
-    return train_scaled, validate_scaled, test_scaled, X_train_scaled, y_train_scaled, X_validate_scaled, y_validate_scaled, X_test_scaled, y_test_scaled
+    return train_scaled, X_train_scaled, y_train_scaled, validate_scaled, X_validate_scaled, y_validate_scaled, test_scaled, X_test_scaled, y_test_scaled
