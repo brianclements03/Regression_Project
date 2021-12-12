@@ -8,8 +8,6 @@ import env
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 import scipy
-import acquire
-import prepare
 from scipy import stats
 
 from sklearn.tree import DecisionTreeClassifier
