@@ -23,7 +23,11 @@ LIST OF MODULES USED IN THE PROJECT, FOUND IN THE PROJECT DIRECTORY:
 
 ## Project Goals
 
-The ultimate goal of this project is to build a model that predicts the tax value of the homes in question with a higher accuracy than the baseline I have chosen. I will use Residual Mean Square Error as my metric for evaluation.
+The ultimate goal of this project is to build a model that predicts the tax value of the homes in question with a higher accuracy than the baseline I have chosen. I will use Residual Mean Square Error as my metric for evaluation; many models will be built using different features and hyperparameters to find the model of best fit.
+
+The final deliverable will be the RMSE value resulting from my best model, contrasted with the baseline RMSE.
+
+Additionally, a Jupyter Notebook with my main findings and conclusions will be a key deliverable; many .py files will exist as a back-up to the main Notebook (think "under-the-hood" coding that will facilitate the presentation).
 
 ## Project Description
 
@@ -44,6 +48,28 @@ LA:	Belongs to Los Angeles county
 Orange:	Belongs to Orange county
 Ventura:	Belings to Ventura county
 
+Variables created in the notebook (explanation where it helps for clarity):
+
+train
+validate
+test
+X_train
+y_train
+X_validate
+y_validate
+X_test
+y_test
+train_scaled
+X_train_scaled
+y_train_scaled
+validate_scaled
+X_validate_scaled
+y_validate_scaled
+test_scaled
+X_test_scaled
+y_test_scaled
+
+
 
 ## Initial Questions
 
@@ -53,9 +79,18 @@ Ventura:	Belings to Ventura county
 
 - Newer homes are larger; they are also valued more highly. Is there an exception to the rule?
 
+
+## Key findings, recommendations and takeaways
+
+- I have found that ...
+
+
+
+
 # NOTES ON YOUR README
 - review the reproduce section, not all those modules existed yet as of the time you wrote it!
-
+- what is the final goal? a dataframe of predictions against actual tax values? or just the rmse as comparted to baseline?
+- what about your key findings (etc) section?
 
 
 
