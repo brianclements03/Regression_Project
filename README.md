@@ -10,28 +10,28 @@ The intention of this project is to follow the data science pipeline by acquirin
 
 In  the case of this project, there are several python files that can be used to acquire, clean, prepare and otherwise manipulate the data in advance of exploration, feature selection, and modeling (listed below).
 
-I split the data into X_train and y_train data sets for much of the exploration and modelling, and was careful that no features were directly dependent on the target variable, tax_value.  I created a couple of features of my own, which helped me determine features to use, and dropped rows with null values (my final dataset was 44,864 rows long, down from 52,442 that were downloaded using SQL)
+I split the data into X_train and y_train data sets for much of the exploration and modelling, and was careful that no features were directly dependent on the target variable (tax_value).  I created a couple of features of my own, which produced some useful insights, and dropped rows with null values (my final dataset was 44,864 rows long, from 52,442 that were downloaded using SQL)
 
 Once the data is correctly prepared, it can be run through the sklearn preprocessing feature for polynomial regressiong and fit on the scaled X_train dataset, using only those features indicated from the recursive polynomial engineering feature selector (also an sklearn function).  This provided me with the best results for the purposes of my project.
 
 LIST OF MODULES USED IN THE PROJECT, FOUND IN THE PROJECT DIRECTORY:
 -- wrangle.py: for acquiring, cleaning, encoding, splitting and scaling the data.  
--- viz.py: used for creating several graphics for my final presentation
+<!-- -- viz.py: used for creating several graphics for my final presentation -->
 -- model.py: many, many different versions of the data were used in different feature selection and modeling algorithms; this module is helpful for splitting them up neatly.
--- explore.py: contains a few functions that were helpful exploring the data.
+<!-- -- explore.py: contains a few functions that were helpful exploring the data. -->
 -- feature_engineering.py: contains functions to help choose the 'best' features using certain sklearn functions
 
 ## Project Goals
 
-The ultimate goal of this project is to build a model that predicts the tax value of the homes in question with a higher accuracy than the baseline I have chosen. I will use Residual Mean Square Error as my metric for evaluation; many models will be built using different features and hyperparameters to find the model of best fit.
-
-The final deliverable will be the RMSE value resulting from my best model, contrasted with the baseline RMSE.
-
-Additionally, a Jupyter Notebook with my main findings and conclusions will be a key deliverable; many .py files will exist as a back-up to the main Notebook (think "under-the-hood" coding that will facilitate the presentation).
+The ultimate goal of this project is to build a model that predicts the tax value of the homes in question with a higher accuracy than the baseline I have chosen--the purpose being to be able to produce better, more accurate home price predictions than Zillow's competitors.  
 
 ## Project Description
 
 This Jupyter Notebook and presentation explore the Zillow dataset from the Codeup database. The data used relates to 2017 real estate transactions relating to single family homes in three California counties, and different aspects of the properties. An important aspect of the Zillow business model is to be able to publish accurate home values; I intend to build a machine learning model that makes predictions about the tax value of the homes in question.
+
+I will use Residual Mean Square Error as my metric for evaluation; many models will be built using different features and hyperparameters to find the model of best fit.  One of the final deliverables will be the RMSE value resulting from my best model, contrasted with the baseline RMSE.
+
+Additionally, a Jupyter Notebook with my main findings and conclusions will be a key deliverable; many .py files will exist as a back-up to the main Notebook (think "under-the-hood" coding that will facilitate the presentation).
 
 ## Data Dictionary
 
