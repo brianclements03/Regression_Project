@@ -48,43 +48,43 @@ LIST OF MODULES USED IN THE PROJECT, FOUND IN THE PROJECT DIRECTORY:
 
 Variable	Meaning
 ___________________
-bedrooms:	The number of bedrooms
-bathrooms:	The number of bathrooms
-sq_ft:	How many square feet
-tax_value:	The tax value of the home
-county:	What county does it belong to
-age:	How old is it?
-sq_ft_per_bathroom:	How many square feet per bathroom?
-LA:	Belongs to Los Angeles county
-Orange:	Belongs to Orange county
-Ventura:	Belings to Ventura county
+- bedrooms:	The number of bedrooms
+- bathrooms:	The number of bathrooms
+- sq_ft:	How many square feet
+- tax_value:	The tax value of the home
+- county:	What county does it belong to
+- age:	How old is it?
+- sq_ft_per_bathroom:	How many square feet per bathroom?
+- LA:	Belongs to Los Angeles county
+- Orange:	Belongs to Orange county
+- Ventura:	Belings to Ventura county
 
 Variables created in the notebook (explanation where it helps for clarity):
 
-train
-validate
-test
-X_train
-y_train
-X_validate
-y_validate
-X_test
-y_test
-train_scaled
-X_train_scaled
-y_train_scaled
-validate_scaled
-X_validate_scaled
-y_validate_scaled
-test_scaled
-X_test_scaled
-y_test_scaled
-X_train_kbest (scaled dataframe with only KBest features)
-X_validate_kbest (scaled dataframe with only KBest features)
-X_test_kbest (scaled dataframe with only KBest features)
-X_train_rfe (scaled dataframe with only RFE features)
-X_validate_rfe (scaled dataframe with only RFE features)
-X_test_rfe (scaled dataframe with only RFE features)
+- train
+- validate
+- test
+- X_train
+- y_train
+- X_validate
+- y_validate
+- X_test
+- y_test
+- train_scaled
+- X_train_scaled
+- y_train_scaled
+- validate_scaled
+- X_validate_scaled
+- y_validate_scaled
+- test_scaled
+- X_test_scaled
+- y_test_scaled
+- X_train_kbest (scaled dataframe with only KBest features)
+- X_validate_kbest (scaled dataframe with only KBest features)
+- X_test_kbest (scaled dataframe with only KBest features)
+- X_train_rfe (scaled dataframe with only RFE features)
+- X_validate_rfe (scaled dataframe with only RFE features)
+- X_test_rfe (scaled dataframe with only RFE features)
 
 Missing values: there were only something around 200 missing values in the data; thus, I have dropped them in the wrangle.py file due to their relative scarcity.  By removing outliers, several thousand rows were dropped.
 
