@@ -15,8 +15,6 @@ import env
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 import scipy
-# import acquire
-# import prepare
 from scipy import stats
 
 from sklearn.tree import DecisionTreeClassifier
@@ -133,8 +131,8 @@ def clean_and_prep_data(df):
     df['sq_ft_per_bathroom'] = df.sq_ft / df.bathrooms
     # dropping the 'yearbuilt' column now that i have the age
     df = df.drop(columns=['yearbuilt', 'tax_amount'])
-# after getting to mvp, please drop all rows where the sq_ft is less than 100 or 200
-
+# Missing values: there were only something around 200 missing values in the data; thus, I have dropped them 
+#  due to their relative scarcity.  By removing outliers, several thousand rows were dropped.
     return df
 
 
@@ -180,33 +178,6 @@ def encode_zillow(df):
     #df = df.drop(columns='county')
     return df
 
-
-# this commented-out section is to scale train only. the full scaler is below
-
-# def scale_zillow(train):
-#     '''
-#     Takes in the zillow dataframe and returns SCALED train, validate, test subset dataframes
-#     '''
-#     # SCALE
-#     # 1. create the object
-#     scaler = sklearn.preprocessing.MinMaxScaler()
-#     # 2. fit the object
-#     scaler.fit(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
-#        'LA', 'Orange', 'Ventura']])
-#     # 3. use the object. Scale all columns for now
-#     train_scaled =  scaler.transform(train[['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
-#        'LA', 'Orange', 'Ventura']])
-#     train_scaled = pd.DataFrame(train_scaled, columns=['bedrooms', 'bathrooms', 'sq_ft', 'tax_value', 'age','sq_ft_per_bathroom',
-#        'LA', 'Orange', 'Ventura'])
-
-#     # 4. Divide into x/y
-
-#     X_train_scaled = train_scaled.drop(columns=['tax_value'])
-#     y_train_scaled = pd.DataFrame(train_scaled.tax_value, columns=['tax_value'])
-
-
-#     return train_scaled, X_train_scaled, y_train_scaled
-    
 
 
 def scale_zillow(train, validate, test):

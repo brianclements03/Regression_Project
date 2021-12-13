@@ -18,7 +18,6 @@ LIST OF MODULES USED IN THE PROJECT, FOUND IN THE PROJECT DIRECTORY:
 -- wrangle.py: for acquiring, cleaning, encoding, splitting and scaling the data.  
 <!-- -- viz.py: used for creating several graphics for my final presentation -->
 -- model.py: many, many different versions of the data were used in different feature selection and modeling algorithms; this module is helpful for splitting them up neatly.
-<!-- -- explore.py: contains a few functions that were helpful exploring the data. -->
 -- feature_engineering.py: contains functions to help choose the 'best' features using certain sklearn functions
 
 ## Project Goals
@@ -69,11 +68,13 @@ test_scaled
 X_test_scaled
 y_test_scaled
 
-
+Missing values: there were only something around 200 missing values in the data; thus, I have dropped them in the wrangle.py file due to their relative scarcity.  By removing outliers, several thousand rows were dropped.
 
 ## Initial Questions
 
-- Are larger homes valued higher?  What about older homes?
+- Are larger homes valued higher?  
+
+- What other aspects can be identified about higher-value homes?
 
 - Do more bathrooms relate to higher tax value? What about square feet per bathroom--is there a sweet spot?
 
