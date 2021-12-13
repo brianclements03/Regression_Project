@@ -357,8 +357,8 @@ def run_all_models_on_all_data(X_train_kbest, y_train_scaled, X_validate_kbest, 
     Function that runs all the above modeling function at the same time and returns a metric dataframe for comparison
     
     '''
-    metric_df = run_ols_model_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df)
     metric_df = run_ols_model_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df)
+    metric_df = run_ols_model_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df)
     metric_df = lasso_lars_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df)
     metric_df = lasso_lars_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df)
     metric_df = tweedie_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df)
