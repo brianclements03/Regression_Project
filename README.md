@@ -61,6 +61,8 @@ ___________________
 
 Variables created in the notebook (explanation where it helps for clarity):
 
+- zillow_sql_query (The original query that is copied to 'zillow' DataFrame for manipulation and analysis)
+- zillow (A copy of the above DataFrame for use in the notebook)
 - train
 - validate
 - test

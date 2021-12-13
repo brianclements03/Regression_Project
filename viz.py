@@ -135,3 +135,21 @@ def histograms(zillow):
         plt.grid(False)
         
         plt.tight_layout()
+
+
+def three_histograms(train):
+    '''
+    Function to draw three histograms for my exploration; please refer to the code and graphic for the variables used.
+    
+    '''
+    # Creating a figure with 3 subplots
+    plt.figure(figsize = (16,3))
+    plt.subplot(1,3, 1)
+    # Here, we see a seaborn barplot of the average tax value in each county
+    sns.barplot(x=train.county, y=train.tax_value)
+    # And tax value for bedroom count
+    plt.subplot(1,3, 2)
+    sns.barplot(x=train.bedrooms, y=train.tax_value)
+    # Finally tax value for bedroom count
+    plt.subplot(1,3, 3)
+    sns.barplot(x=train.bathrooms, y=train.tax_value)
