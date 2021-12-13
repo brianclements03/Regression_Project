@@ -31,7 +31,6 @@ warnings.filterwarnings("ignore")
 # importing my personal wrangle module
 import wrangle
 
-###################### Acquire Titanic Data ######################
 
 def get_connection(db, user=user, host=host, password=password):
     '''

@@ -32,6 +32,10 @@ warnings.filterwarnings("ignore")
 import wrangle
 
 def actual_vs_predicted(y_train_scaled):
+    '''
+    Funtion to create a histogram for the mean tax value contrasted against all actual tax values.
+    
+    '''
     # plot to visualize actual vs predicted. 
     plt.hist(y_train_scaled.tax_value_pred_mean, color='red', alpha=.5,  label="Predicted Tax Values - Mean")
     plt.hist(y_train_scaled.tax_value, color='blue', alpha=.5, label="Actual Tax Values")
@@ -43,6 +47,11 @@ def actual_vs_predicted(y_train_scaled):
 
 
 def age_by_county(train):
+    '''
+    Function to show a seaborn histogram of the age of homes by county.
+    
+    '''
+
     plt.figure(figsize = (16,3))
     plt.subplot(1,3, 1)
 
@@ -71,3 +80,58 @@ def age_by_county(train):
 
     plt.grid(False)
     plt.tight_layout()
+
+
+def histograms(zillow):
+
+    '''
+    Function to create univariate histograms for all continuous features in the zillow data set.
+    
+    '''
+    # Here, we create a for loop that makes a histogram for every column. This is the start of my univariate analysis
+
+    plt.figure(figsize=(16, 3))
+
+    # List of columns
+    cols = ['bedrooms', 'bathrooms','sq_ft','tax_value', 'age', 'sq_ft_per_bathroom']
+    # Note the enumerate code, which is functioning to make a counter for use in successive plots.
+
+    for i, col in enumerate(cols):
+        
+        # i starts at 0, but plot nos should start at 1
+        plot_number = i + 1 
+        
+        # Create subplot.
+        plt.subplot(1,8, plot_number)
+        
+        # Title with column name.
+        plt.title(col)
+        
+        # Display histogram for column.
+        zillow[col].hist(bins=10, edgecolor='black')
+        
+        # Hide gridlines.
+        plt.grid(False)
+        
+        plt.tight_layout(),
+
+    plt.figure(figsize=(16, 3))
+
+    for i, col in enumerate(cols):
+        
+        # i starts at 0, but plot nos should start at 1
+        plot_number = i + 1 
+        
+        # Create subplot.
+        plt.subplot(1,7, plot_number)
+        
+        # Title with column name.
+        plt.title(col)
+        
+        # Display histogram for column.
+        plt.boxplot(zillow[col])
+        
+        # Hide gridlines.
+        plt.grid(False)
+        
+        plt.tight_layout()

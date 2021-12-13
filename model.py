@@ -57,6 +57,10 @@ def create_data_for_models(X_train_scaled, X_validate_scaled, X_test_scaled):
 
 
 def run_ols_model_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df):
+    '''
+    Function that runs the ols model on the kbest data
+    
+    '''
     from sklearn.metrics import mean_squared_error
     # create the model object
     lm = LinearRegression()
@@ -86,6 +90,10 @@ def run_ols_model_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_valid
 
 
 def run_ols_model_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df):
+    '''
+    Function that runs the ols model on the rfe data
+    
+    '''
     from sklearn.metrics import mean_squared_error
     # create the model object
     lm = LinearRegression()
@@ -115,6 +123,10 @@ def run_ols_model_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_sc
 
 
 def lasso_lars_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df):
+    '''
+    Function that runs the lasso lars model on the kbest data
+    
+    '''
 
     # a good balance is a low rmse and a low difference
 
@@ -146,7 +158,10 @@ def lasso_lars_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate
 
 def lasso_lars_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df):
 
-
+    '''
+    Function that runs the lasso lars model on the rfe data
+    
+    '''
     # THIS IS LARS WITH RFE
     lars = LassoLars(alpha= .1)
 
@@ -178,6 +193,11 @@ def lasso_lars_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scale
 
 def tweedie_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df):
 
+    '''
+    Function that runs the tweedie model on the kbest data
+    
+    '''
+
 # as seen in curriculum, the power ought to be set per distribution type
 # power = 0 is same as OLS
 
@@ -208,6 +228,11 @@ def tweedie_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_sc
     return metric_df
 
 def tweedie_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df):
+
+    '''
+    Function that runs the tweedie model on the rfe data
+    
+    '''
         # Tweedie on RFE features:
 
     # as seen in curriculum, the power ought to be set per distribution type
@@ -241,6 +266,11 @@ def tweedie_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, 
 
 
 def polynomial_regression_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, X_test_kbest, metric_df):
+    '''
+    Function that runs the polynomial model on the kbest data
+    
+    '''    
+        
         # make the polynomial features to get a new set of features. import from sklearn
     pf = PolynomialFeatures(degree=3)
 
@@ -278,7 +308,10 @@ def polynomial_regression_kbest(X_train_kbest, y_train_scaled, X_validate_kbest,
 
 
 def polynomial_regression_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, X_test_rfe, metric_df):
-
+    '''
+    Function that runs the polynomial model on the rfe data
+    
+    '''  
     # make the polynomial features to get a new set of features. import from sklearn
     pf = PolynomialFeatures(degree=2)
 
@@ -320,6 +353,10 @@ def polynomial_regression_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_val
 
 
 def run_all_models_on_all_data(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, X_train_rfe, X_validate_rfe, X_test_kbest, X_test_rfe, metric_df):
+    '''
+    Function that runs all the above modeling function at the same time and returns a metric dataframe for comparison
+    
+    '''
     metric_df = run_ols_model_rfe(X_train_rfe, y_train_scaled, X_validate_rfe, y_validate_scaled, metric_df)
     metric_df = run_ols_model_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df)
     metric_df = lasso_lars_kbest(X_train_kbest, y_train_scaled, X_validate_kbest, y_validate_scaled, metric_df)
