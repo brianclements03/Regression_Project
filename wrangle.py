@@ -90,7 +90,6 @@ def remove_outliers(df, k, col_list):
     Here, we remove outliers from a list of columns in a dataframe and return that dataframe
     
     '''
-    
     for col in col_list:
 
         q1, q3 = df[col].quantile([.25, .75])  # get quartiles
